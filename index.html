@@ -11,37 +11,37 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/style.css" />
+    <script src="scripts/script.js" defer></script>
   </head>
   <body>
     <main>
-      <!-- calculator-output to use placeholder value until connected to JS -->
-      <div id="calculator-output">25</div>
+      <div id="calculator-output" data-current-operand></div>
 
       <div class="standard-row">
         <button data-number>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>/</button>
+        <button data-number>8</button>
+        <button data-number>9</button>
+        <button data-operation>/</button>
       </div>
       <div class="standard-row">
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>x</button>
+        <button data-number>4</button>
+        <button data-number>5</button>
+        <button data-number>6</button>
+        <button data-operation>x</button>
       </div>
       <div class="standard-row">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>-</button>
+        <button data-number>1</button>
+        <button data-number>2</button>
+        <button data-number>3</button>
+        <button data-operation>-</button>
       </div>
       <div class="standard-row">
-        <button id="button-zero">0</button>
-        <button>.</button>
-        <button>+</button>
+        <button id="button-zero" data-number>0</button>
+        <button data-number>.</button>
+        <button data-operation>+</button>
       </div>
       <div class="standard-row">
-        <button id="button-equal">=</button>
+        <button id="button-equal" data-equals>=</button>
       </div>
     </main>
   </body>
