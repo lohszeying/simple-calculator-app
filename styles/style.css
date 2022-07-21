@@ -21,17 +21,21 @@ main {
   font-weight: 700;
   font-size: 40px;
   line-height: 47px;
-  padding: 17px 18.06px 16px;
+  height: 47px;
+  padding: 17px 18.06px 16px 18.06px;
   align-items: center;
   text-align: right;
   margin: 0 10.42px 8.5px 10.42px;
+  /* from https://stackoverflow.com/a/20656241 : */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .standard-row {
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin: auto;
 }
 
 button {
@@ -51,7 +55,7 @@ button {
 
 #button-zero {
   padding: 8px 32.87px 7px 36.16px;
-  width: 50%;
+  width: 53.5%; /* eyeball width */
 }
 
 button:active {
