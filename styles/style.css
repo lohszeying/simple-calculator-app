@@ -50,7 +50,7 @@ button {
 
 #button-zero {
   padding: 8px 32.87px 7px 36.16px;
-  width: 53.5%;
+  width: 53.5%; /* eyeball width %, probably not the best approach */ 
 }
 
 button:active {
