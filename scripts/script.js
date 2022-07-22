@@ -16,14 +16,17 @@ class Calculator {
   // append number, including dot (.)
   // Do not want to append number after computing (unlike the tutorial, there is no clear button here)
   appendNumber(number) {
-    if (number === "." && this.currentOperand.includes(".")) {
-      return;
+    if (number === "." && !this.justComputed) {
+      if (this.currentOperand.includes(".")) {
+        return;
+      }
     }
+
     // if justComputed, this.currentOperand = '';
     if (this.justComputed) {
-      //Do not want to append number, but start a new calculation
+      // Do not want to append number, but start a new calculation
       this.currentOperand = number.toString();
-      this.justComputed = false; //set justComputed to false so user can begin a new computation after computing a result
+      this.justComputed = false; // set justComputed to false so user can begin a new computation after computing a result
     } else {
       this.currentOperand = this.currentOperand.toString() + number.toString();
     }
@@ -47,21 +50,24 @@ class Calculator {
     let computation;
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
+
     if (isNaN(prev) || isNaN(current)) {
       return;
     }
+    
+    // https://stackoverflow.com/questions/14490496/how-to-multiply-in-javascript-problems-with-decimals
     switch (this.operation) {
       case "+":
-        computation = prev + current;
+        computation = this.humanize(prev + current);
         break;
       case "-":
-        computation = prev - current;
+        computation = this.humanize(prev - current);
         break;
       case "x":
-        computation = prev * current;
+        computation = this.humanize(prev * current);
         break;
       case "/":
-        computation = prev / current;
+        computation = this.humanize(prev / current);
         break;
       default:
         return;
@@ -73,8 +79,6 @@ class Calculator {
   }
 
   getDisplayNumber(number, text) {
-    console.log("number: " + number + ", text: " + text);
-
     const stringNumber = number.toString();
     const integerDigits = parseFloat(stringNumber.split(".")[0]);
     const decimalDigits = stringNumber.split(".")[1];
@@ -89,20 +93,31 @@ class Calculator {
     if (decimalDigits != null) {
       return `${integerDisplay}.${decimalDigits}`;
     } else {
-        if (integerDisplay === '') {
-            return text;
-        } else {
-            return integerDisplay;
-        }
+      if (integerDisplay === "") {
+        return text;
+      } else {
+        return integerDisplay;
+      }
     }
   }
 
-  //WIP: to make updateDisplay() also display operation if possible, or maybe just continue displaying current operand (like Mac's calculator)
+  // to make updateDisplay() also display operation if possible, or maybe just continue displaying current operand (like Mac's calculator)
   updateDisplay() {
     this.currentOperandTextElement.innerText = this.getDisplayNumber(
       this.currentOperand,
       this.operation
     );
+  }
+
+  // https://stackoverflow.com/questions/661562/how-to-format-a-float-in-javascript/661757#661757
+  customToFixed(value, precision) {
+    var power = Math.pow(10, precision || 0);
+    return String(Math.round(value * power) / power);
+  }
+
+  // https://stackoverflow.com/questions/661562/how-to-format-a-float-in-javascript/661757#661757
+  humanize(x) {
+    return this.customToFixed(x, 10).replace(/\.?0*$/, "");
   }
 }
 
